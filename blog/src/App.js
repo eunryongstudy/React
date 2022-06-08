@@ -19,11 +19,9 @@ function App() {
           글제목변경(copy)}}>글수정
       </button>
       <button onClick={() => {
-        글제목.sort(function(a, b){
-          a.글제목 > b.글제목 ? 1 : -1
-          console.log(b);
-        })
-
+        let copy = [...글제목];
+        copy.sort();
+        글제목변경(copy)
       }}>
         정렬
       </button>
