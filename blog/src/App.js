@@ -5,7 +5,7 @@ function App() {
 
   let [글제목, 글제목변경] =useState(['남자 셔츠 추천', '진주 냉면 맛집', 'React 독학'])
   let [좋아요, 좋아요변경] =useState(0);
-
+  let [modal, setModal] = useState(false);
 
   return (
     <div className="App">
@@ -36,11 +36,15 @@ function App() {
         <p>6월 8일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4 onClick= { () => {
+          { modal == true ? setModal(false) : setModal(true)}
+          }}>{글제목[2]}</h4>
         <p>6월 8일 발행</p>
       </div>
-      
-      <Modal></Modal>
+
+      {
+        modal == true ? <Modal/> : null
+      }
     </div>
   );
 }
