@@ -6,6 +6,7 @@ function App() {
   let [글제목, 글제목변경] =useState(['남자 셔츠 추천', '진주 냉면 맛집', 'React 독학'])
   let [좋아요, 좋아요변경] =useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [title, setTitle] = useState(0);
 
   [1,2,3].map(function(){
 
@@ -49,7 +50,8 @@ function App() {
       {
         글제목.map(function(a, i){
           return (<div className="list" key={i}>
-          <h4>{ 글제목[i] } <span onClick={ () => {
+          <h4 onClick= { () => {
+          { modal == true ? setModal(false) : setModal(true); setTitle(i)}}}>{ 글제목[i] } <span onClick={ () => {
             let copy = [...좋아요];
             copy[i] = copy[i] + 1;
             좋아요변경(copy)
@@ -60,18 +62,23 @@ function App() {
       }
 
       {
-        modal == true ? <Modal/> : null
+        modal == true ? <Modal 글제목={글제목} 글제목변경={글제목변경} title={title}/> : null
       }
     </div>
   );
 }
 
-function Modal(){
+function Modal(props){
   return(
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.글제목[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      {/* <button onClick={() => {
+        let copy = [props.글제목];
+        copy[0] = '여자 셔츠 추천';
+        props.글제목변경(copy[0]);
+      }}>글수정</button> */}
     </div>
   )
 }
