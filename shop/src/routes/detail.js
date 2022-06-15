@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 function Detail(props){
 
     
-
+    let[num, setNum] = useState('')
     let[count, setCount] = useState(0);
     let[alert, setAlert] = useState(true);
     let {id} = useParams();
@@ -14,21 +14,21 @@ function Detail(props){
       });
 
       useEffect(()=>{
-
-        setTimeout(()=>{
-            setAlert(false)
-        }, 2000,[])
-    })
-
+        if(isNaN(num) == true){
+            alert('그러지 마세요')
+        }
+    },[num])        
+    
     return (
         <>
         <div className="container">
+        
+        <input onChange={(e)=>{ setNum(e.target.value) }} />
             {alert == true ? 
             <div className="alert alert-warning">
             2초이내 구매시 할인
             </div> 
             : null}
-            
             <button onClick ={()=>{ setCount(count+1)}}>버튼</button>
             <div className="row">
                 <div className="col-md-6">
